@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" :class="containerClass">
+  <div v-show="visible" :class="containerClass">
     <transition
       :name="guaranteedOverlayTransition"
       @before-enter="beforeOverlayTransitionEnter"
@@ -8,7 +8,7 @@
       @after-leave="afterOverlayTransitionLeave"
     >
       <div
-        v-if="visibility.overlay"
+        v-show="visibility.overlay"
         class="vm--overlay"
         :data-modal="name"
         :aria-expanded="visibility.overlay.toString()"
@@ -27,7 +27,7 @@
       @after-leave="afterModalTransitionLeave"
     >
       <div
-        v-if="visibility.modal"
+        v-show="visibility.modal"
         ref="modal"
         :aria-expanded="visibility.modal.toString()"
         :class="modalClass"
@@ -37,7 +37,7 @@
       >
         <slot />
         <resizer
-          v-if="resizable && !isAutoHeight"
+          v-show="resizable && !isAutoHeight"
           :min-width="minWidth"
           :min-height="minHeight"
           :max-width="maxWidth"
@@ -222,6 +222,7 @@ export default {
   },
   created() {
     this.setInitialSize()
+    console.log('in Vue Js Modal plugin')
   },
   /**
    * Sets global listeners
